@@ -12,7 +12,12 @@ public class InternalRegister {
     }
 
     public void removeCash (Cash cash) {
-        this.internalRegister.remove(cash);
+        for (int i = 0, j = 0 ; i < internalRegister.size() && j == 0 ; i++) {
+            if (this.internalRegister.get(i) == cash) {
+                this.internalRegister.remove(i);
+                j = 1;
+            }
+        }
     }
 
     public float getBalance () {
