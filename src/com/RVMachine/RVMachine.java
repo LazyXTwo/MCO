@@ -17,27 +17,23 @@ public class RVMachine {
         itemList.clear();
     }
 
-    public void addItem (String strName, float fPrice, int nCaloricValue, int nQuantity) {
+    public void stockItem (String strName, float fPrice, int nCaloricValue, int nQuantity) {
         itemList.add(new Item(strName, fPrice, nCaloricValue, nQuantity));
     }
 
-    public void removeItem (int nIndex) {
-        itemList.remove(nIndex);
-    }
-
-    public void updateItem (int nIndex, float fPrice) {
-        itemList.get(nIndex).setPrice(fPrice);
-    }
-
-    public void updateItem (int nIndex, int nQuantity) {
+    public void restockItem (int nIndex, int nQuantity) {
         itemList.get(nIndex).setQuantity(itemList.get(nIndex).getQuantity()+nQuantity);
+    }
+
+    public void setPrice (int nIndex, float fPrice) {
+        itemList.get(nIndex).setPrice(fPrice);
     }
 
     public float collectMoney () {
        return cashBox.releaseCash();
     }
 
-    public void replenishReserves (int nIndex, int nCount) {
+    public void replenishMoney (int nIndex, int nCount) {
         changeFund.addCount(nIndex, nCount);
     }
 
