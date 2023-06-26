@@ -30,6 +30,10 @@ public class CashBox {
         return fBalance;
     }
 
+    public void initCount (int nIndex) {
+        cashBox.get(nIndex).setCount(0);
+    }
+    
     public void addCount (int nIndex, int nCount) {
         cashBox.get(nIndex).setCount(cashBox.get(nIndex).getCount()+nCount);
     }
@@ -38,21 +42,16 @@ public class CashBox {
         cashBox.get(nIndex).setCount(cashBox.get(nIndex).getCount()-nCount);
     }
 
-    public float getAmount (int nIndex) {
-        return cashBox.get(nIndex).getAmount();
-    }
-
     public int getCount (int nIndex) {
         return cashBox.get(nIndex).getCount();
     }
 
-    public void initCount (int nIndex) {
-        cashBox.get(nIndex).setCount(0);
+    public float getAmount (int nIndex) {
+        return cashBox.get(nIndex).getAmount();
     }
-    
+
     public int getSize () {
         return cashBox.size();
     }
-
 
 }
