@@ -2,18 +2,18 @@ package com.RVMachine;
 
 import com.Item.*;
 import com.CashBox.*;
-import com.ChangeFund.*;
-import com.Payment.*;
 
 import java.util.ArrayList;
 
 public class RVMachine {
-    private ArrayList<Item> itemList = new ArrayList<Item>();
-    private CashBox cashBox = new CashBox();
-    private Payment payment = new Payment();
-    private ChangeFund changeFund = new ChangeFund();
+    private ArrayList<Item> itemList;
+    private ArrayList<Item> transactionHistory;
+    private CashBox cashBox;
+    private CashBox payment;
+    private CashBox changeFund;
 
-    float fBalance;
+    float fBalance = 0;
+    boolean bRestock = false;
 
     public RVMachine () {
         itemList.clear();
@@ -21,15 +21,16 @@ public class RVMachine {
 
     public void receivePayment (int nIndex, int nCount, boolean bFlag) {
         if (bFlag == false) {
-            payment.storeCash(nIndex, nCount);
+            payment.addCount(nIndex, nCount);
         }
         else {
-            cashBox.storeCash(nIndex, nCount);
+            cashBox.addCount(nIndex, nCount);
         }
     }
 
     public void dispenseItem (int nIndex, int nCount) {
         itemList.get(nIndex).setQuantity(itemList.get(nIndex).getQuantity()-nCount);
+        transactionHistory.get(nIndex).setQuantity(itemList.get(nIndex).getQuantity()+nCount);
     }
 
     public void finalizePayment () {
@@ -40,23 +41,34 @@ public class RVMachine {
     }
 
     public float returnPayment () {
-        return payment.releaseCash();
+        fBalance = 0;
+        for (int i = 0 ; i < payment.getSize() ; i++) {
+            fBalance += payment.getAmount(i)*payment.getCount(i);
+            payment.initCount(i);
+        }
+        return fBalance;
     }
 
     public void stockItem (String strName, float fPrice, int nCaloricValue, int nQuantity) {
         itemList.add(new Item(strName, fPrice, nCaloricValue, nQuantity));
+        transactionHistory.add(new Item(strName, fPrice, 0));
+    }
+
+    public void isRestocking (boolean bRestock) {
+        this.bRestock = bRestock;
     }
 
     public void restockItem (int nIndex, int nQuantity) {
         itemList.get(nIndex).setQuantity(itemList.get(nIndex).getQuantity()+nQuantity);
     }
 
-    public void setPrice (int nIndex, float fPrice) {
-        itemList.get(nIndex).setPrice(fPrice);
-    }
-
     public float collectMoney () {
-       return cashBox.releaseCash();
+        fBalance = 0;
+        for (int i = 0 ; i < cashBox.getSize() ; i++) {
+            fBalance += cashBox.getAmount(i)*cashBox.getCount(i);
+            cashBox.initCount(i);
+        }
+        return fBalance;
     }
 
     public void replenishMoney (int nIndex, int nCount) {

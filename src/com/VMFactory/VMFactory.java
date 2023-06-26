@@ -97,7 +97,7 @@ public class VMFactory {
                 case 3:
                     System.out.print("\033[H\033[2J");
                     System.out.flush();
-                    System.out.println("Terminating program...");
+                    System.out.println("Terminating program..");
                     break;
                 default:
                     System.out.print("\033[H\033[2J");

@@ -13,6 +13,12 @@ public class Item {
         this.nQuantity = nQuantity;
     }
 
+    public Item (String strName, float fPrice, int nQuantity) {
+        this.strName = strName;
+        this.fPrice = fPrice;
+        this.nQuantity = nQuantity;
+    }
+
     public String getName () {
         return this.strName;
     }
@@ -33,7 +39,4 @@ public class Item {
         this.nQuantity = nQuantity;
     }
     
-    public void setPrice (float fPrice) {
-        this.fPrice = fPrice;
-    }
 }
