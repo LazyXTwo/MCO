@@ -7,8 +7,6 @@ import java.util.ArrayList;
 public class CashBox {
     private ArrayList<Money> cashBox = new ArrayList<Money>();
     
-    float fBalance;
-
     public CashBox () {
         cashBox.add(new Money(1));
         cashBox.add(new Money(5));
@@ -21,15 +19,6 @@ public class CashBox {
         cashBox.add(new Money(1000));
     }
     
-    public float releaseCash () {
-        fBalance = 0;
-        for (int i = 0 ; i < cashBox.size() ; i++) {
-            fBalance += cashBox.get(i).getCount()*cashBox.get(i).getAmount();
-            cashBox.get(i).setCount(0);
-        }     
-        return fBalance;
-    }
-
     public void initCount (int nIndex) {
         cashBox.get(nIndex).setCount(0);
     }
@@ -46,7 +35,7 @@ public class CashBox {
         return cashBox.get(nIndex).getCount();
     }
 
-    public float getAmount (int nIndex) {
+    public double getAmount (int nIndex) {
         return cashBox.get(nIndex).getAmount();
     }
 

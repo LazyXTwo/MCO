@@ -7,13 +7,13 @@ import java.util.ArrayList;
 
 public class RVMachine {
     private ArrayList<Item> itemList;
-    private ArrayList<Item> transactionHistory;
+    private ArrayList<Item> transactionSummary;
+    private ArrayList<Item> startingInventory;
     private CashBox cashBox;
     private CashBox payment;
     private CashBox changeFund;
 
-    float fBalance = 0;
-    boolean bRestock = false;
+    double dBalance;
 
     public RVMachine () {
         itemList.clear();
@@ -30,7 +30,7 @@ public class RVMachine {
 
     public void dispenseItem (int nIndex, int nCount) {
         itemList.get(nIndex).setQuantity(itemList.get(nIndex).getQuantity()-nCount);
-        transactionHistory.get(nIndex).setQuantity(itemList.get(nIndex).getQuantity()+nCount);
+        transactionSummary.get(nIndex).setQuantity(itemList.get(nIndex).getQuantity()+nCount);
     }
 
     public void finalizePayment () {
@@ -40,46 +40,72 @@ public class RVMachine {
         }
     }
 
-    public float returnPayment () {
-        fBalance = 0;
+    public double getPaymentBalance () {
+        dBalance = 0;
         for (int i = 0 ; i < payment.getSize() ; i++) {
-            fBalance += payment.getAmount(i)*payment.getCount(i);
+            dBalance += payment.getAmount(i)*payment.getCount(i);
+        }
+        return dBalance;       
+    }
+
+    public double returnPayment () {
+        dBalance = 0;
+        for (int i = 0 ; i < payment.getSize() ; i++) {
+            dBalance += payment.getAmount(i)*payment.getCount(i);
             payment.initCount(i);
         }
-        return fBalance;
+        return dBalance;
     }
 
-    public void stockItem (String strName, float fPrice, int nCaloricValue, int nQuantity) {
-        itemList.add(new Item(strName, fPrice, nCaloricValue, nQuantity));
-        transactionHistory.add(new Item(strName, fPrice, 0));
-    }
-
-    public void isRestocking (boolean bRestock) {
-        this.bRestock = bRestock;
+    public void stockItem (String strName, double dPrice, int nCaloricValue, int nQuantity) {
+        itemList.add(new Item(strName, dPrice, nCaloricValue, nQuantity));
+        transactionSummary.add(new Item(strName, dPrice, 0));
     }
 
     public void restockItem (int nIndex, int nQuantity) {
         itemList.get(nIndex).setQuantity(itemList.get(nIndex).getQuantity()+nQuantity);
     }
 
-    public float collectMoney () {
-        fBalance = 0;
+    public void initTransactionSummary () {
+        for (int i = 0 ; i < transactionSummary.size() ; i++){
+            transactionSummary.get(i).setQuantity(0);
+        }
+    }
+
+    public ArrayList<Item> getTransactionSummary () {
+        return transactionSummary;
+    }
+
+    public void setStartingInventory () {
+        startingInventory = itemList;
+    }
+
+    public ArrayList<Item> getStartingInventory () {
+        return startingInventory;
+    }
+
+    public ArrayList<Item> getEndingInventory () {
+        return itemList;
+    }
+
+    public double collectMoney () {
+        dBalance = 0;
         for (int i = 0 ; i < cashBox.getSize() ; i++) {
-            fBalance += cashBox.getAmount(i)*cashBox.getCount(i);
+            dBalance += cashBox.getAmount(i)*cashBox.getCount(i);
             cashBox.initCount(i);
         }
-        return fBalance;
+        return dBalance;
     }
 
     public void replenishMoney (int nIndex, int nCount) {
         changeFund.addCount(nIndex, nCount);
     }
-
+    
     public String getName (int nIndex) {
         return itemList.get(nIndex).getName();
     }
 
-    public float getPrice (int nIndex) {
+    public double getPrice (int nIndex) {
         return itemList.get(nIndex).getPrice();
     }
 

@@ -2,20 +2,20 @@ package com.Item;
 
 public class Item {
     private String strName;
-    private float fPrice;
+    private double dPrice;
     private int nCaloricValue;
     private int nQuantity;
 
-    public Item (String strName, float fPrice, int nCaloricValue, int nQuantity) {
+    public Item (String strName, double dPrice, int nCaloricValue, int nQuantity) {
         this.strName = strName;
-        this.fPrice = fPrice;
+        this.dPrice = dPrice;
         this.nCaloricValue = nCaloricValue;
         this.nQuantity = nQuantity;
     }
 
-    public Item (String strName, float fPrice, int nQuantity) {
+    public Item (String strName, double dPrice, int nQuantity) {
         this.strName = strName;
-        this.fPrice = fPrice;
+        this.dPrice = dPrice;
         this.nQuantity = nQuantity;
     }
 
@@ -23,8 +23,8 @@ public class Item {
         return this.strName;
     }
 
-    public float getPrice () {
-        return this.fPrice;
+    public double getPrice () {
+        return this.dPrice;
     }
 
     public int getCaloricValue () {

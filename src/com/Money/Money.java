@@ -1,16 +1,16 @@
 package com.Money;
 
 public class Money {
-    private float fAmount;
+    private double dAmount;
     private int nCount;
 
-    public Money (float fAmount) {
-        this.fAmount = fAmount;
+    public Money (double dAmount) {
+        this.dAmount = dAmount;
         this.nCount = 0;
     }
 
-    public float getAmount () {
-        return this.fAmount;
+    public double getAmount () {
+        return this.dAmount;
     }
 
     public int getCount () {
