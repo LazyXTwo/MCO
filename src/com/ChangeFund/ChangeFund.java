@@ -29,4 +29,12 @@ public class ChangeFund {
         changeFund.get(nIndex).setCount(changeFund.get(nIndex).getCount()-nCount);
     }
 
+    public float getAmount (int nIndex) {
+        return changeFund.get(nIndex).getAmount();
+    }
+
+    public float getCount (int nIndex) {
+        return changeFund.get(nIndex).getCount();
+    }
+
 }
