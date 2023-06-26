@@ -78,4 +78,5 @@ public class RVMachine {
     public int getQuantity (int nIndex) {
         return itemList.get(nIndex).getQuantity();
     }
+    
 }

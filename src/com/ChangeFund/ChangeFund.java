@@ -33,7 +33,7 @@ public class ChangeFund {
         return changeFund.get(nIndex).getAmount();
     }
 
-    public float getCount (int nIndex) {
+    public int getCount (int nIndex) {
         return changeFund.get(nIndex).getCount();
     }
 
