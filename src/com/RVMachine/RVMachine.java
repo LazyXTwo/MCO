@@ -6,12 +6,13 @@ import com.CashBox.*;
 import java.util.ArrayList;
 
 public class RVMachine {
-    private ArrayList<Item> itemList;
-    private ArrayList<Item> transactionSummary;
-    private ArrayList<Item> startingInventory;
-    private CashBox cashBox;
-    private CashBox payment;
-    private CashBox changeFund;
+    private ArrayList<Item> itemList = new ArrayList<Item>();
+    private ArrayList<Item> transactionSummary = new ArrayList<Item>();
+    private ArrayList<Item> startingInventory = new ArrayList<Item>();
+    private CashBox cashBox = new CashBox();
+    private CashBox payment = new CashBox();
+    private CashBox changeFund = new CashBox();
+    private CashBox changeList = new CashBox();
 
     double dBalance;
 
@@ -101,20 +102,28 @@ public class RVMachine {
         changeFund.addCount(nIndex, nCount);
     }
     
-    public String getName (int nIndex) {
-        return itemList.get(nIndex).getName();
-    }
+    public boolean calculateChange (double dPayment) {
+        for (int i = 0 ; i < changeList.getSize() ; i++) {
+            changeList.initCount(i);
+        }
 
-    public double getPrice (int nIndex) {
-        return itemList.get(nIndex).getPrice();
-    }
+        for (int i = cashBox.getSize()-1 ; i != -1 ; i--) {
+            if (changeFund.getCount(i) >= dPayment/cashBox.getAmount(i)) {
+                changeList.addCount(i, (int) (dPayment/cashBox.getAmount(i)));
+                System.out.print(dPayment);
+                dPayment = dPayment%cashBox.getAmount(i);
+                System.out.println(" % " +  cashBox.getAmount(i) + " = " + dPayment);
+            }
+        }
 
-    public int getCaloricValue (int nIndex) {
-        return itemList.get(nIndex).getCaloricValue();
-    }
+        if (dPayment != 0) {
+            for (int i = 0 ; i < changeList.getSize() ; i++) {
+                changeList.initCount(i);
+            }
+            return false;
+        }
 
-    public int getQuantity (int nIndex) {
-        return itemList.get(nIndex).getQuantity();
+        return true;
     }
     
 }

@@ -8,9 +8,6 @@ public class CashBox {
     private ArrayList<Money> cashBox = new ArrayList<Money>();
     
     public CashBox () {
-        cashBox.add(new Money(0.01));
-        cashBox.add(new Money(0.05));
-        cashBox.add(new Money(0.25));
         cashBox.add(new Money(1));
         cashBox.add(new Money(5));
         cashBox.add(new Money(10));
