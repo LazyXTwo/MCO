@@ -110,9 +110,7 @@ public class RVMachine {
         for (int i = cashBox.getSize()-1 ; i != -1 ; i--) {
             if (changeFund.getCount(i) >= dPayment/cashBox.getAmount(i)) {
                 changeList.addCount(i, (int) (dPayment/cashBox.getAmount(i)));
-                System.out.print(dPayment);
                 dPayment = dPayment%cashBox.getAmount(i);
-                System.out.println(" % " +  cashBox.getAmount(i) + " = " + dPayment);
             }
         }
 
@@ -125,5 +123,5 @@ public class RVMachine {
 
         return true;
     }
-    
+
 }
