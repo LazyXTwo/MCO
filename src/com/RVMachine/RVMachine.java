@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class RVMachine {
     private ArrayList<Item> itemList = new ArrayList<Item>();
     private ArrayList<Item> transactionSummary = new ArrayList<Item>();
-    private ArrayList<Item> startingInventory = new ArrayList<Item>();
     private CashBox cashBox = new CashBox();
     private CashBox payment = new CashBox();
     private CashBox changeFund = new CashBox();
@@ -58,35 +57,52 @@ public class RVMachine {
         return dBalance;
     }
 
-    public void stockItem (String strName, double dPrice, int nCaloricValue, int nQuantity) {
+    public boolean stockItem (String strName, double dPrice, int nCaloricValue, int nQuantity) {
+
+        for (int i = 0 ; i < itemList.size() ; i++) {
+            if (itemList.get(i).getName().equals(strName)) {
+                return false;
+            }
+        }
+
         itemList.add(new Item(strName, dPrice, nCaloricValue, nQuantity));
         transactionSummary.add(new Item(strName, dPrice, 0));
+
+        return true;
     }
 
-    public void restockItem (int nIndex, int nQuantity) {
-        itemList.get(nIndex).setQuantity(itemList.get(nIndex).getQuantity()+nQuantity);
+    public boolean restockItem (int nIndex, int nQuantity) {
+        if (nIndex < itemList.size() && nIndex >= 0 && nQuantity > 0) {
+            itemList.get(nIndex).setQuantity(itemList.get(nIndex).getQuantity()+nQuantity);
+            return true;
+        }
+        return false;
     }
 
-    public void initTransactionSummary () {
-        for (int i = 0 ; i < transactionSummary.size() ; i++){
-            transactionSummary.get(i).setQuantity(0);
+    public void printItemList () {
+        for (int i = 0 ; i < itemList.size() ; i++) {
+            System.out.println("Index : [" + i + "]\tProduct Name : " + itemList.get(i).getName() + "\tPrice : " + itemList.get(i).getPrice() + "\tCaloric Value : " + itemList.get(i).getCaloricValue() + "\tQuantity : " + itemList.get(i).getQuantity());
         }
     }
 
-    public ArrayList<Item> getTransactionSummary () {
-        return transactionSummary;
+    public void printChangeFund () {
+        for (int i = 0 ; i < changeFund.getSize() ; i++) {
+            System.out.println("Amount : " + changeFund.getAmount(i) + "\tRemaining Count : " + changeFund.getCount(i));
+        }
+    }
+
+    public void printTransactionSummary () {
+        for (int i = 0 ; i < itemList.size() ; i++) {
+            System.out.println("Product Name : " + itemList.get(i).getName() + "\tPrice : " + itemList.get(i).getPrice() + "\tOriginal Quantity since Last Restock : " + transactionSummary.get(i).getQuantity() + "\tCurrent Quantity : " + itemList.get(i).getQuantity());
+        }
     }
 
     public void setStartingInventory () {
-        startingInventory = itemList;
-    }
-
-    public ArrayList<Item> getStartingInventory () {
-        return startingInventory;
-    }
-
-    public ArrayList<Item> getEndingInventory () {
-        return itemList;
+        for (int i = 0 ; i < itemList.size() ; i++) {
+            transactionSummary.get(i).setName(itemList.get(i).getName());
+            transactionSummary.get(i).setPrice(itemList.get(i).getPrice());
+            transactionSummary.get(i).setQuantity(itemList.get(i).getQuantity());
+        }
     }
 
     public double collectMoney () {
@@ -98,8 +114,12 @@ public class RVMachine {
         return dBalance;
     }
 
-    public void replenishMoney (int nIndex, int nCount) {
-        changeFund.addCount(nIndex, nCount);
+    public boolean replenishMoney (int nIndex, int nCount) {
+        if (changeFund.getSize() > nIndex && nIndex >= 0 && nCount > 0) {
+            changeFund.addCount(nIndex, nCount);
+            return true;
+        }
+        return false;
     }
     
     public boolean calculateChange (double dPayment) {

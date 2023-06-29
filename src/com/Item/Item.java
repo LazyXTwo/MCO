@@ -35,6 +35,14 @@ public class Item {
         return this.nQuantity;
     }
 
+    public void setName (String strName) {
+        this.strName = strName;
+    }
+
+    public void setPrice (double dPrice) {
+        this.dPrice = dPrice;
+    }
+
     public void setQuantity (int nQuantity) {
         this.nQuantity = nQuantity;
     }
