@@ -167,6 +167,7 @@ public class RVMachine {
         dBalance = 0;
         for (int i = 0 ; i < changeList.getSize() ; i++) {
             dBalance += changeList.getAmount(i)*changeList.getCount(i);
+            changeFund.subtractCount(i, changeList.getCount(i));
             changeList.initCount(i);
         }
         return dBalance;

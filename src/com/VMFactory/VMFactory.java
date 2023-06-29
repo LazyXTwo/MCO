@@ -147,7 +147,9 @@ public class VMFactory {
                                             }
                                             regVendingMachine.receivePayment(nAnswer1, nAnswer2, false);
                                         } while (regVendingMachine.getPaymentBalance() < regVendingMachine.getItemPrice(nChoice_ItemSelection));
-                                        if (regVendingMachine.calculateChange(regVendingMachine.getPaymentBalance()) == true) {
+                                        if (regVendingMachine.calculateChange(regVendingMachine.getPaymentBalance()-regVendingMachine.getItemPrice(nChoice_ItemSelection)) == true) {
+                                            System.out.print("\033[H\033[2J");
+                                            System.out.flush();
                                             regVendingMachine.finalizePayment();
                                             regVendingMachine.dispenseItem(nChoice_ItemSelection);
                                             System.out.println(regVendingMachine.getItemName(nChoice_ItemSelection) + " has been purchased successfully.");
@@ -157,6 +159,8 @@ public class VMFactory {
                                             sc.nextLine();
                                         }
                                         else {
+                                            System.out.print("\033[H\033[2J");
+                                            System.out.flush();
                                             System.out.println("The Vending Machine does not have enough funds to produce a change. The item cannot be dispensed.");
                                             System.out.println(regVendingMachine.getPaymentBalance() + " has been returned to you.");
                                             regVendingMachine.initPaymentBalance();
