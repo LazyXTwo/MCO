@@ -28,9 +28,9 @@ public class RVMachine {
         }
     }
 
-    public void dispenseItem (int nIndex, int nCount) {
-        itemList.get(nIndex).setQuantity(itemList.get(nIndex).getQuantity()-nCount);
-        transactionSummary.get(nIndex).setQuantity(itemList.get(nIndex).getQuantity()+nCount);
+    public void dispenseItem (int nIndex) {
+        itemList.get(nIndex).setQuantity(itemList.get(nIndex).getQuantity()-1);
+        transactionSummary.get(nIndex).setQuantity(itemList.get(nIndex).getQuantity()+1);
     }
 
     public void finalizePayment () {
@@ -48,13 +48,10 @@ public class RVMachine {
         return dBalance;       
     }
 
-    public double returnPayment () {
-        dBalance = 0;
+    public void initPaymentBalance () {
         for (int i = 0 ; i < payment.getSize() ; i++) {
-            dBalance += payment.getAmount(i)*payment.getCount(i);
             payment.initCount(i);
         }
-        return dBalance;
     }
 
     public boolean stockItem (String strName, double dPrice, int nCaloricValue, int nQuantity) {
@@ -72,7 +69,7 @@ public class RVMachine {
     }
 
     public boolean restockItem (int nIndex, int nQuantity) {
-        if (nIndex < itemList.size() && nIndex >= 0 && nQuantity > 0) {
+        if (nQuantity > 0) {
             itemList.get(nIndex).setQuantity(itemList.get(nIndex).getQuantity()+nQuantity);
             return true;
         }
@@ -81,7 +78,7 @@ public class RVMachine {
 
     public void printItemList () {
         for (int i = 0 ; i < itemList.size() ; i++) {
-            System.out.println("Index : [" + i + "]\tProduct Name : " + itemList.get(i).getName() + "\tPrice : " + itemList.get(i).getPrice() + "\tCaloric Value : " + itemList.get(i).getCaloricValue() + "\tQuantity : " + itemList.get(i).getQuantity());
+            System.out.println("[" + i + "]\tItem Name : " + itemList.get(i).getName() + "\tPrice : " + itemList.get(i).getPrice() + "\tCaloric Value : " + itemList.get(i).getCaloricValue() + "\tQuantity : " + itemList.get(i).getQuantity());
         }
     }
 
@@ -91,9 +88,15 @@ public class RVMachine {
         }
     }
 
+    public void printPayment () {
+        for (int i = 0 ; i < payment.getSize() ; i++) {
+            System.out.println("[" + i + "]" + "\tAmount : " + payment.getAmount(i) + "\tCount : " + payment.getCount(i));
+        }
+    }
+
     public void printTransactionSummary () {
         for (int i = 0 ; i < itemList.size() ; i++) {
-            System.out.println("Product Name : " + itemList.get(i).getName() + "\tPrice : " + itemList.get(i).getPrice() + "\tOriginal Quantity since Last Restock : " + transactionSummary.get(i).getQuantity() + "\tCurrent Quantity : " + itemList.get(i).getQuantity());
+            System.out.println("Item Name : " + itemList.get(i).getName() + "\tPrice : " + itemList.get(i).getPrice() + "\tOriginal Quantity since Last Restock : " + transactionSummary.get(i).getQuantity() + "\tCurrent Quantity : " + itemList.get(i).getQuantity());
         }
     }
 
@@ -115,7 +118,7 @@ public class RVMachine {
     }
 
     public boolean replenishMoney (int nIndex, int nCount) {
-        if (changeFund.getSize() > nIndex && nIndex >= 0 && nCount > 0) {
+        if (nCount > 0) {
             changeFund.addCount(nIndex, nCount);
             return true;
         }
@@ -144,4 +147,32 @@ public class RVMachine {
         return true;
     }
 
+    public int getItemListSize () {
+        return itemList.size();
+    }
+
+    public int getItemQuantity (int nIndex) {
+        return itemList.get(nIndex).getQuantity();
+    }
+
+    public int getChangeFundSize () {
+        return changeFund.getSize();
+    }
+
+    public double getItemPrice (int nIndex) {
+        return itemList.get(nIndex).getPrice();
+    }
+
+    public double getChange () {
+        dBalance = 0;
+        for (int i = 0 ; i < changeList.getSize() ; i++) {
+            dBalance += changeList.getAmount(i)*changeList.getCount(i);
+            changeList.initCount(i);
+        }
+        return dBalance;
+    }
+
+    public String getItemName (int nIndex) {
+        return itemList.get(nIndex).getName();
+    }
 }
