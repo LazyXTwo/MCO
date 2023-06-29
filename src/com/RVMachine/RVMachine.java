@@ -20,17 +20,10 @@ public class RVMachine {
     }
 
     public void receivePayment (int nIndex, int nCount, boolean bFlag) {
-        if (bFlag == false) {
+        if (bFlag == false)
             payment.addCount(nIndex, nCount);
-        }
-        else {
+        else
             cashBox.addCount(nIndex, nCount);
-        }
-    }
-
-    public void dispenseItem (int nIndex) {
-        itemList.get(nIndex).setQuantity(itemList.get(nIndex).getQuantity()-1);
-        transactionSummary.get(nIndex).setQuantity(itemList.get(nIndex).getQuantity()+1);
     }
 
     public void finalizePayment () {
@@ -40,31 +33,12 @@ public class RVMachine {
         }
     }
 
-    public double getPaymentBalance () {
-        dBalance = 0;
-        for (int i = 0 ; i < payment.getSize() ; i++) {
-            dBalance += payment.getAmount(i)*payment.getCount(i);
-        }
-        return dBalance;       
-    }
-
-    public void initPaymentBalance () {
-        for (int i = 0 ; i < payment.getSize() ; i++) {
-            payment.initCount(i);
-        }
-    }
-
     public boolean stockItem (String strName, double dPrice, int nCaloricValue, int nQuantity) {
-
-        for (int i = 0 ; i < itemList.size() ; i++) {
-            if (itemList.get(i).getName().equals(strName)) {
+        for (int i = 0 ; i < itemList.size() ; i++)
+            if (itemList.get(i).getName().equals(strName))
                 return false;
-            }
-        }
-
         itemList.add(new Item(strName, dPrice, nCaloricValue, nQuantity));
         transactionSummary.add(new Item(strName, dPrice, 0));
-
         return true;
     }
 
@@ -76,36 +50,9 @@ public class RVMachine {
         return false;
     }
 
-    public void printItemList () {
-        for (int i = 0 ; i < itemList.size() ; i++) {
-            System.out.println("[" + i + "]\tItem Name : " + itemList.get(i).getName() + "\tPrice : " + itemList.get(i).getPrice() + "\tCaloric Value : " + itemList.get(i).getCaloricValue() + "\tQuantity : " + itemList.get(i).getQuantity());
-        }
-    }
-
-    public void printChangeFund () {
-        for (int i = 0 ; i < changeFund.getSize() ; i++) {
-            System.out.println("[" + i + "]" + "\tAmount : " + changeFund.getAmount(i) + "\tRemaining Count : " + changeFund.getCount(i));
-        }
-    }
-
-    public void printPayment () {
-        for (int i = 0 ; i < payment.getSize() ; i++) {
-            System.out.println("[" + i + "]" + "\tAmount : " + payment.getAmount(i) + "\tCount : " + payment.getCount(i));
-        }
-    }
-
-    public void printTransactionSummary () {
-        for (int i = 0 ; i < itemList.size() ; i++) {
-            System.out.println("Item Name : " + itemList.get(i).getName() + "\tPrice : " + itemList.get(i).getPrice() + "\tOriginal Quantity since Last Restock : " + transactionSummary.get(i).getQuantity() + "\tCurrent Quantity : " + itemList.get(i).getQuantity());
-        }
-    }
-
-    public void setStartingInventory () {
-        for (int i = 0 ; i < itemList.size() ; i++) {
-            transactionSummary.get(i).setName(itemList.get(i).getName());
-            transactionSummary.get(i).setPrice(itemList.get(i).getPrice());
-            transactionSummary.get(i).setQuantity(itemList.get(i).getQuantity());
-        }
+    public void dispenseItem (int nIndex) {
+        itemList.get(nIndex).setQuantity(itemList.get(nIndex).getQuantity()-1);
+        transactionSummary.get(nIndex).setQuantity(itemList.get(nIndex).getQuantity()+1);
     }
 
     public double collectMoney () {
@@ -126,41 +73,80 @@ public class RVMachine {
     }
     
     public boolean calculateChange (double dPayment) {
-        for (int i = 0 ; i < changeList.getSize() ; i++) {
+        for (int i = 0 ; i < changeList.getSize() ; i++)
             changeList.initCount(i);
-        }
-
         for (int i = cashBox.getSize()-1 ; i != -1 ; i--) {
             if (changeFund.getCount(i) >= dPayment/cashBox.getAmount(i)) {
                 changeList.addCount(i, (int) (dPayment/cashBox.getAmount(i)));
                 dPayment = dPayment%cashBox.getAmount(i);
             }
         }
-
         if (dPayment != 0) {
-            for (int i = 0 ; i < changeList.getSize() ; i++) {
+            for (int i = 0 ; i < changeList.getSize() ; i++)
                 changeList.initCount(i);
-            }
             return false;
         }
-
         return true;
     }
 
-    public int getItemListSize () {
-        return itemList.size();
+    public void printItemList () {
+        for (int i = 0 ; i < itemList.size() ; i++)
+            System.out.println("[" + ++i + "]\tItem Name : " + itemList.get(--i).getName() + "\tPrice : " + itemList.get(i).getPrice() + "\tCaloric Value : " + itemList.get(i).getCaloricValue() + "\tQuantity : " + itemList.get(i).getQuantity());
+    }
+
+    public void printChangeFund () {
+        for (int i = 0 ; i < changeFund.getSize() ; i++)
+            System.out.println("[" + ++i + "]" + "   Amount : " + changeFund.getAmount(--i) + "\tRemaining Count : " + changeFund.getCount(i));
+    }
+
+    public void printPayment () {
+        for (int i = 0 ; i < payment.getSize() ; i++)
+            System.out.println("[" + ++i + "]" + "   Amount : " + payment.getAmount(--i) + "\tCount : " + payment.getCount(i));
+    }
+
+    public void printTransactionSummary () {
+        for (int i = 0 ; i < itemList.size() ; i++)
+            System.out.println("Item Name : " + itemList.get(i).getName() + "\tPrice : " + itemList.get(i).getPrice() + "\tOriginal Quantity since Last Restock : " + transactionSummary.get(i).getQuantity() + "\tCurrent Quantity : " + itemList.get(i).getQuantity());
+    }
+
+    public void initStartingInventory () {
+        for (int i = 0 ; i < itemList.size() ; i++) {
+            transactionSummary.get(i).setName(itemList.get(i).getName());
+            transactionSummary.get(i).setPrice(itemList.get(i).getPrice());
+            transactionSummary.get(i).setQuantity(itemList.get(i).getQuantity());
+        }
+    }
+    
+    public void initPaymentBalance () {
+        for (int i = 0 ; i < payment.getSize() ; i++)
+            payment.initCount(i);
+    }
+
+    public double getPaymentBalance () {
+        dBalance = 0;
+        for (int i = 0 ; i < payment.getSize() ; i++)
+            dBalance += payment.getAmount(i)*payment.getCount(i);
+        return dBalance;       
+    }
+
+    public String getItemName (int nIndex) {
+        return itemList.get(nIndex).getName();
+    }
+
+    public double getItemPrice (int nIndex) {
+        return itemList.get(nIndex).getPrice();
     }
 
     public int getItemQuantity (int nIndex) {
         return itemList.get(nIndex).getQuantity();
     }
 
-    public int getChangeFundSize () {
-        return changeFund.getSize();
+    public int getItemListSize () {
+        return itemList.size();
     }
 
-    public double getItemPrice (int nIndex) {
-        return itemList.get(nIndex).getPrice();
+    public int getChangeFundSize () {
+        return changeFund.getSize();
     }
 
     public double getChange () {
@@ -171,9 +157,5 @@ public class RVMachine {
             changeList.initCount(i);
         }
         return dBalance;
-    }
-
-    public String getItemName (int nIndex) {
-        return itemList.get(nIndex).getName();
     }
 }
