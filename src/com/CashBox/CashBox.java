@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class CashBox {
     private ArrayList<Money> cashBox = new ArrayList<Money>();
-    
+
     public CashBox () {
         cashBox.add(new Money(1));
         cashBox.add(new Money(5));
@@ -18,11 +18,11 @@ public class CashBox {
         cashBox.add(new Money(500));
         cashBox.add(new Money(1000));
     }
-    
+
     public void initCount (int nIndex) {
         cashBox.get(nIndex).setCount(0);
     }
-    
+
     public void addCount (int nIndex, int nCount) {
         cashBox.get(nIndex).setCount(cashBox.get(nIndex).getCount()+nCount);
     }

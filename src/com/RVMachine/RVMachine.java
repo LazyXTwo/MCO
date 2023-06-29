@@ -71,7 +71,7 @@ public class RVMachine {
         }
         return false;
     }
-    
+
     public boolean calculateChange (double dPayment) {
         for (int i = 0 ; i < changeList.getSize() ; i++)
             changeList.initCount(i);
@@ -116,7 +116,7 @@ public class RVMachine {
             transactionSummary.get(i).setQuantity(itemList.get(i).getQuantity());
         }
     }
-    
+
     public void initPaymentBalance () {
         for (int i = 0 ; i < payment.getSize() ; i++)
             payment.initCount(i);
