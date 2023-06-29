@@ -89,26 +89,6 @@ public class RVMachine {
         return true;
     }
 
-    public void printItemList () {
-        for (int i = 0 ; i < itemList.size() ; i++)
-            System.out.println("[" + ++i + "]\tItem Name : " + itemList.get(--i).getName() + "\tPrice : " + itemList.get(i).getPrice() + "\tCaloric Value : " + itemList.get(i).getCaloricValue() + "\tQuantity : " + itemList.get(i).getQuantity());
-    }
-
-    public void printChangeFund () {
-        for (int i = 0 ; i < changeFund.getSize() ; i++)
-            System.out.println("[" + ++i + "]" + "   Amount : " + changeFund.getAmount(--i) + "\tRemaining Count : " + changeFund.getCount(i));
-    }
-
-    public void printPayment () {
-        for (int i = 0 ; i < payment.getSize() ; i++)
-            System.out.println("[" + ++i + "]" + "   Amount : " + payment.getAmount(--i) + "\tCount : " + payment.getCount(i));
-    }
-
-    public void printTransactionSummary () {
-        for (int i = 0 ; i < itemList.size() ; i++)
-            System.out.println("Item Name : " + itemList.get(i).getName() + "\tPrice : " + itemList.get(i).getPrice() + "\tOriginal Quantity since Last Restock : " + transactionSummary.get(i).getQuantity() + "\tCurrent Quantity : " + itemList.get(i).getQuantity());
-    }
-
     public void initStartingInventory () {
         for (int i = 0 ; i < itemList.size() ; i++) {
             transactionSummary.get(i).setName(itemList.get(i).getName());
@@ -137,6 +117,10 @@ public class RVMachine {
         return itemList.get(nIndex).getPrice();
     }
 
+    public int getItemCaloricValue (int nIndex) {
+        return itemList.get(nIndex).getCaloricValue();
+    }
+
     public int getItemQuantity (int nIndex) {
         return itemList.get(nIndex).getQuantity();
     }
@@ -147,6 +131,22 @@ public class RVMachine {
 
     public int getChangeFundSize () {
         return changeFund.getSize();
+    }
+
+    public double getChangeFundAmount (int nIndex) {
+        return changeFund.getAmount(nIndex);
+    }
+
+    public int getChangeFundCount (int nIndex) {
+        return changeFund.getCount(nIndex);
+    }
+
+    public int getPaymentCount (int nIndex) {
+        return payment.getCount(nIndex);
+    }
+
+    public int getTransactionSummaryQuantity (int nIndex) {
+        return transactionSummary.get(nIndex).getQuantity();
     }
 
     public double getChange () {

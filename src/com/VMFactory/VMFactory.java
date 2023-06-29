@@ -87,14 +87,16 @@ public class VMFactory {
                                     else {
                                         factory.flush();
                                         System.out.println("Please select an item to purchase.\n");
-                                        regVendingMachine.printItemList();
+                                        for (int i = 0 ; i < regVendingMachine.getItemListSize() ; i++)
+                                            System.out.println("[" + ++i + "]\tItem Name : " + regVendingMachine.getItemName(--i) + "\tPrice : " + regVendingMachine.getItemPrice(i) + "\tCaloric Value : " + regVendingMachine.getItemCaloricValue(i) + "\tQuantity : " + regVendingMachine.getItemQuantity(i));
                                         System.out.print("\n\nEnter item index : ");
                                         nChoice_ItemSelection = sc.nextInt()-1;
                                         if (nChoice_ItemSelection < 0 || regVendingMachine.getItemListSize() <= nChoice_ItemSelection) {
                                             do {
                                                 factory.flush();
                                                 System.out.println("ERROR : Selected index is out of bounds. Please try again.\n");
-                                                regVendingMachine.printItemList();
+                                                for (int i = 0 ; i < regVendingMachine.getItemListSize() ; i++)
+                                                    System.out.println("[" + ++i + "]\tItem Name : " + regVendingMachine.getItemName(--i) + "\tPrice : " + regVendingMachine.getItemPrice(i) + "\tCaloric Value : " + regVendingMachine.getItemCaloricValue(i) + "\tQuantity : " + regVendingMachine.getItemQuantity(i));
                                                 System.out.print("\n\nEnter item index : ");
                                                 nChoice_ItemSelection = sc.nextInt()-1;
                                             } while (nChoice_ItemSelection < 0 || regVendingMachine.getItemListSize() <= nChoice_ItemSelection);
@@ -102,14 +104,16 @@ public class VMFactory {
                                         do {
                                             factory.flush();
                                             System.out.println("Current Balance : " + regVendingMachine.getPaymentBalance() + "\n");
-                                            regVendingMachine.printPayment();
+                                            for (int i = 0 ; i < regVendingMachine.getChangeFundSize() ; i++)
+                                                System.out.println("[" + ++i + "]" + "   Amount : " + regVendingMachine.getChangeFundAmount(--i) + "\tCount : " + regVendingMachine.getPaymentCount(i));
                                             System.out.print("\nPlease select an amount to deposit.\n\nEnter denomination index : ");
                                             nAnswer1 = sc.nextInt()-1;
                                             if (nAnswer1 < 0 || regVendingMachine.getChangeFundSize() <= nAnswer1) {
                                                 do {
                                                     factory.flush();
                                                     System.out.println("ERROR : Selected index is out of bounds. Please try again.\n");
-                                                    regVendingMachine.printPayment();
+                                                    for (int i = 0 ; i < regVendingMachine.getChangeFundSize() ; i++)
+                                                        System.out.println("[" + ++i + "]" + "   Amount : " + regVendingMachine.getChangeFundAmount(--i) + "\tCount : " + regVendingMachine.getPaymentCount(i));
                                                     System.out.print("\nEnter denomination index : ");
                                                     nAnswer1 = sc.nextInt()-1;
                                                 } while (nAnswer1 < 0 || regVendingMachine.getChangeFundSize() <= nAnswer1);
@@ -150,7 +154,8 @@ public class VMFactory {
                                             case 1:
                                                 factory.flush();
                                                 System.out.println(">> Item Inventory");
-                                                regVendingMachine.printItemList();
+                                                for (int i = 0 ; i < regVendingMachine.getItemListSize() ; i++)
+                                                    System.out.println("[" + ++i + "]\tItem Name : " + regVendingMachine.getItemName(--i) + "\tPrice : " + regVendingMachine.getItemPrice(i) + "\tCaloric Value : " + regVendingMachine.getItemCaloricValue(i) + "\tQuantity : " + regVendingMachine.getItemQuantity(i));
                                                 System.out.print("--end of list--\n\nPress enter to continue.");
                                                 factory.next();
                                                 break;
@@ -198,14 +203,16 @@ public class VMFactory {
                                                             }
                                                             else {
                                                                 factory.flush();
-                                                                regVendingMachine.printItemList();
+                                                                for (int i = 0 ; i < regVendingMachine.getItemListSize() ; i++)
+                                                                    System.out.println("[" + ++i + "]\tItem Name : " + regVendingMachine.getItemName(--i) + "\tPrice : " + regVendingMachine.getItemPrice(i) + "\tCaloric Value : " + regVendingMachine.getItemCaloricValue(i) + "\tQuantity : " + regVendingMachine.getItemQuantity(i));
                                                                 System.out.print("\n\nEnter item index : ");
                                                                 nAnswer1 = sc.nextInt()-1;
                                                                 if (nAnswer1 < 0 || regVendingMachine.getItemListSize() <= nAnswer1)
                                                                     do {
                                                                         factory.flush();
                                                                         System.out.println("ERROR : Selected index is out of bounds. Please try again.\n\n");
-                                                                        regVendingMachine.printItemList();
+                                                                        for (int i = 0 ; i < regVendingMachine.getItemListSize() ; i++)
+                                                                            System.out.println("[" + ++i + "]\tItem Name : " + regVendingMachine.getItemName(--i) + "\tPrice : " + regVendingMachine.getItemPrice(i) + "\tCaloric Value : " + regVendingMachine.getItemCaloricValue(i) + "\tQuantity : " + regVendingMachine.getItemQuantity(i));
                                                                         System.out.print("\n\nEnter item index : ");
                                                                         nAnswer1 = sc.nextInt()-1;
                                                                     } while (nAnswer1 < 0 || regVendingMachine.getItemListSize() <= nAnswer1);
@@ -233,7 +240,8 @@ public class VMFactory {
                                                         case 3:
                                                             factory.flush();
                                                             System.out.println(">> Item Inventory");
-                                                            regVendingMachine.printItemList();
+                                                            for (int i = 0 ; i < regVendingMachine.getItemListSize() ; i++)
+                                                                System.out.println("[" + ++i + "]\tItem Name : " + regVendingMachine.getItemName(--i) + "\tPrice : " + regVendingMachine.getItemPrice(i) + "\tCaloric Value : " + regVendingMachine.getItemCaloricValue(i) + "\tQuantity : " + regVendingMachine.getItemQuantity(i));
                                                             System.out.print("--end of list--\n\nPress enter to continue.");
                                                             factory.next();
                                                             break;
@@ -256,20 +264,23 @@ public class VMFactory {
                                             case 4:
                                                 factory.flush();
                                                 System.out.println(">> Change Fund Inventory");
-                                                regVendingMachine.printChangeFund();
+                                                for (int i = 0 ; i < regVendingMachine.getChangeFundSize() ; i++)
+                                                    System.out.println("[" + ++i + "]" + "   Amount : " + regVendingMachine.getChangeFundAmount(--i) + "\tRemaining Count : " + regVendingMachine.getChangeFundCount(i));
                                                 System.out.print("--end of list--\n\nPress enter to continue.");
                                                 factory.next();
                                                 break;
                                             case 5:
                                                 factory.flush();
-                                                regVendingMachine.printChangeFund();
+                                                for (int i = 0 ; i < regVendingMachine.getChangeFundSize() ; i++)
+                                                    System.out.println("[" + ++i + "]" + "   Amount : " + regVendingMachine.getChangeFundAmount(--i) + "\tRemaining Count : " + regVendingMachine.getChangeFundCount(i));
                                                 System.out.print("\n\nEnter denomination index : ");
                                                 nAnswer1 = sc.nextInt()-1;
                                                 if (nAnswer1 < 0 || regVendingMachine.getChangeFundSize() <= nAnswer1)
                                                     do {
                                                         factory.flush();
                                                         System.out.println("ERROR : Selected index is out of bounds. Please try again.\n\n");
-                                                        regVendingMachine.printChangeFund();
+                                                        for (int i = 0 ; i < regVendingMachine.getChangeFundSize() ; i++)
+                                                            System.out.println("[" + ++i + "]" + "   Amount : " + regVendingMachine.getChangeFundAmount(--i) + "\tRemaining Count : " + regVendingMachine.getChangeFundCount(i));
                                                         System.out.print("\n\nEnter denomination index : ");
                                                         nAnswer1 = sc.nextInt()-1;
                                                     } while (nAnswer1 < 0 || regVendingMachine.getChangeFundSize() <= nAnswer1);
@@ -289,7 +300,8 @@ public class VMFactory {
                                             case 6:
                                                 factory.flush();
                                                 System.out.println(">> Transaction Summary since Last Restock");
-                                                regVendingMachine.printTransactionSummary();
+                                                for (int i = 0 ; i < regVendingMachine.getItemListSize() ; i++)
+                                                    System.out.println("Item Name : " + regVendingMachine.getItemName(i) + "\tPrice : " + regVendingMachine.getItemPrice(i) + "\tOriginal Quantity since Last Restock : " + regVendingMachine.getTransactionSummaryQuantity(i) + "\tCurrent Quantity : " + regVendingMachine.getItemQuantity(i));
                                                 System.out.print("--end of list--\n\nPress enter to continue.");
                                                 factory.next();
                                                 break;
