@@ -84,7 +84,7 @@ public class RVMachine {
 
     public void printChangeFund () {
         for (int i = 0 ; i < changeFund.getSize() ; i++) {
-            System.out.println("Amount : " + changeFund.getAmount(i) + "\tRemaining Count : " + changeFund.getCount(i));
+            System.out.println("[" + i + "]" + "\tAmount : " + changeFund.getAmount(i) + "\tRemaining Count : " + changeFund.getCount(i));
         }
     }
 
