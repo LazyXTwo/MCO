@@ -131,6 +131,7 @@ public class VMFactory {
                                                     regVendingMachine.printPayment();
                                                     System.out.println("\n");
                                                     System.out.print("Enter denomination index : ");
+                                                    nAnswer1 = sc.nextInt();
                                                 } while (nAnswer1 < 0 || regVendingMachine.getChangeFundSize() <= nAnswer1);
                                             }
                                             System.out.print("\033[H\033[2J");
