@@ -8,17 +8,31 @@ import java.util.Arrays;
 
 public class VMFactory {
     Scanner sc = new Scanner(System.in);
+
+    /**
+     * clears the console screen.
+     */
     private void flush () {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
+
+    /**
+     * waits for the user to send an "Enter" key.
+     */
     private void next () {
         sc.nextLine();
     }
-    private static void print (ArrayList<String> strArray) {
-        for (int i = 0 ; i < strArray.size() ; i++)
-            System.out.println(" [" + ++i + "] " + strArray.get(--i));
+
+    /**
+     * prints a menu using the given array for its contents
+     * @param arrMenu an array of strings used for menu creation
+     */
+    private static void print (ArrayList<String> arrMenu) {
+        for (int i = 0 ; i < arrMenu.size() ; i++)
+            System.out.println(" [" + ++i + "] " + arrMenu.get(--i));
     }
+    
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
         int nChoice_MainMenu, nChoice_MachineType, nChoice_MachineFeature, nChoice_MaintenanceFeature, nChoice_Stocking, nChoice_ItemSelection, nAnswer1, nAnswer2;
@@ -128,7 +142,7 @@ public class VMFactory {
                                             }
                                             regVendingMachine.receivePayment(nAnswer1, nAnswer2, false);
                                         } while (regVendingMachine.getPaymentBalance() < regVendingMachine.getItemPrice(nChoice_ItemSelection));
-                                        if (regVendingMachine.calculateChange(regVendingMachine.getPaymentBalance()-regVendingMachine.getItemPrice(nChoice_ItemSelection)) == true) {
+                                        if (regVendingMachine.checkChangeFund(regVendingMachine.getPaymentBalance()-regVendingMachine.getItemPrice(nChoice_ItemSelection)) == true) {
                                             factory.flush();
                                             regVendingMachine.finalizePayment();
                                             regVendingMachine.dispenseItem(nChoice_ItemSelection);
