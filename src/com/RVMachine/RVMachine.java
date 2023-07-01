@@ -1,9 +1,9 @@
 /**
  * A RVMachine represents a regular vending machine. Each RVMachine has an item storage (itemList),
  * a list of transactions (transactionSummary), a register for keeping finalized payments (cashBox),
- * a register for keeping payments until a transaction is considered successful (payment), a register
+ * a register for keeping payments until a transaction is considered successful (pendingPayment), a register
  * for keeping funds for dispensing change (changeFund), and a register for holding change to be
- * dispensed until a transaction is considered successful (changeList).
+ * dispensed until a transaction is considered successful (pendingChange).
  */
 
 package com.RVMachine;
