@@ -13,7 +13,7 @@ import com.CashBox.*;
 import java.util.ArrayList;
 
 public class Machine {
-    private ArrayList<SellableItem> sellableItemsList = new ArrayList<SellableItem>();
+    protected ArrayList<SellableItem> sellableItemsList = new ArrayList<SellableItem>();
     protected ArrayList<Item> transactionSummary = new ArrayList<Item>();
     protected CashBox cashBox = new CashBox();
     protected CashBox pendingPayment = new CashBox();
