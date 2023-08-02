@@ -22,6 +22,19 @@ public class SVMachine extends Machine {
         transactionSummary.add(new NonSellableItem(strName, dPrice, nCaloricValue, 0));
         return true;
     }
+    
+    public boolean restockItemS(int nIndex, int nQuantity) {
+        if (nQuantity > 0) {
+            nonSellableItemsList.get(nIndex).setQuantity(nonSellableItemsList.get(nIndex).getQuantity() + nQuantity);
+            return true;
+        }
+        return false;
+    }
+
+    public void dispenseItemS(int nIndex) {
+        nonSellableItemsList.get(nIndex).setQuantity(nonSellableItemsList.get(nIndex).getQuantity() - 1);
+        transactionSummary.get(nIndex).setQuantity(nonSellableItemsList.get(nIndex).getQuantity() + 1);
+    }
 
     public void initStartingInventoryS() {
         for (int i = 0; i < nonSellableItemsList.size(); i++) {
@@ -34,19 +47,19 @@ public class SVMachine extends Machine {
         return nonSellableItemsList.get(nIndex).getName();
     }
 
-    public double getItemPrice(int nIndex) {
+    public double getItemPriceS(int nIndex) {
         return nonSellableItemsList.get(nIndex).getPrice();
     }
 
-    public int getItemCaloricValue(int nIndex) {
+    public int getItemCaloricValueS(int nIndex) {
         return nonSellableItemsList.get(nIndex).getCaloricValue();
     }
 
-    public int getItemQuantity(int nIndex) {
+    public int getItemQuantityS(int nIndex) {
         return nonSellableItemsList.get(nIndex).getQuantity();
     }
 
-    public int getItemListSize() {
+    public int getItemListSizeS() {
         return nonSellableItemsList.size();
     }
 
