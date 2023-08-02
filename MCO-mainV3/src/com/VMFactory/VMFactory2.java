@@ -121,19 +121,19 @@ public class VMFactory2 {
                                         switch (nChoice_MachineFeature) {
                                             case 1:
                                                 if (regVendingMachine.getItemListSize() < 8
-                                                        || regVendingMachine.getItemListSize() > 20) {
+                                                        || regVendingMachine.getItemListSize() > 26) {
                                                     factory.flush();
                                                     if (regVendingMachine.getItemListSize() < 8) {
                                                         System.out.print(
                                                                 "ERROR : At least eight (8) unique items must be supplied into the Vending Machine to access this feature.\nCurrently, the Vending Machine is supplied with ("
                                                                         + regVendingMachine.getItemListSize()
                                                                         + ") unique items.\n\nPress enter to continue.");
-                                                    } else if (regVendingMachine.getItemListSize() > 20) {
+                                                    } else if (regVendingMachine.getItemListSize() > 26) {
                                                         System.out.print(
-                                                                "ERROR : More than twenty (20) unique items have been supplied into the Vending Machine.\nCurrently, the Vending Machine is supplied with ("
+                                                                "ERROR : More than twenty (25) unique items have been supplied into the Vending Machine.\nCurrently, the Vending Machine is supplied with ("
                                                                         + regVendingMachine.getItemListSize()
                                                                         + ") unique items.\n\nSelect which to be removed Press enter to continue.");
-                                                        regVendingMachine.removeLast(19);
+                                                        regVendingMachine.removeLast(24);
                                                     }
                                                     factory.next();
                                                 } else {
